@@ -16,14 +16,15 @@ void draw(){
   fill(255,0,0);
   // If the two data points are created, then draw the points
   // and find the line that fits the data
-  if (points.size() > 1){
+  if (points.size() > 0){
     for(int i = 0; i < points.size();i++){
       float xcord = map(points.get(i).x,0,1,0,width);
       float ycord = map(points.get(i).y,0,1,height,0);
       // draw the points
       circle(xcord,ycord,10);
     }
-    
+   }
+  if (points.size() > 1){    
     // Draw a line
   float x1 = 0;
   float x2 = 1;
