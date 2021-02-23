@@ -1,24 +1,33 @@
+// Gloabal variables for holding the x and y coordinates of the mouse
+// position on the screen
 float mouse_x;
 float mouse_y;
+// A list of point vectors
+// stores the x and y position of the datapoints
 ArrayList<PVector> points = new ArrayList<PVector>();
 
 void setup(){
+// Initialize screen width and height
   size(400,400);
 }
-
+// loop 
 void draw(){
   background(45);
   fill(255,0,0);
+  // If the two data points are created, then draw the points
+  // and find the line that fits the data
   if (points.size() > 1){
     for(int i = 0; i < points.size();i++){
       float xcord = map(points.get(i).x,0,1,0,width);
       float ycord = map(points.get(i).y,0,1,height,0);
+      // draw the points
       circle(xcord,ycord,10);
     }
     
     // Draw a line
   float x1 = 0;
   float x2 = 1;
+  
   float[] meanAndIntercept = linearRegression();
   float m = meanAndIntercept[0];
   float b = meanAndIntercept[1];
@@ -36,7 +45,7 @@ void draw(){
   } 
   
 }
-
+// Called when the user clicks the mouse on the screen
 void mousePressed(){
   mouse_x = map(mouseX,0,width,0,1);
   mouse_y = map(mouseY,0,height,1,0);
@@ -44,6 +53,7 @@ void mousePressed(){
   PVector pvector = new PVector(mouse_x,mouse_y);
   points.add(pvector);
 }
+
 
 float[] linearRegression(){
   
