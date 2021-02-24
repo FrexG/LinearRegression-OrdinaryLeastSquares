@@ -8,11 +8,17 @@ ArrayList<PVector> points = new ArrayList<PVector>();
 
 void setup(){
 // Initialize screen width and height
-  size(400,400);
+  size(600,600);
 }
 // loop 
 void draw(){
   background(45);
+  
+  // Add a Y and X axis line
+  stroke(255);
+  line(10,10,10,height-10);
+  line(10,height-10,width-10,height-10);
+  
   fill(255,0,0);
   // If the two data points are created, then draw the points
   // and find the line that fits the data
@@ -36,12 +42,12 @@ void draw(){
   float y1 = m *x1 + b;
   float y2 = m *x2 + b;
   
-  x1 = map(x1,0,1,0,width);
-  x2 = map(x2,0,1,0,width);
+  x1 = map(x1,0,1,0,width-10);
+  x2 = map(x2,0,1,0,width-10);
   
-  y1 = map(y1,0,1,height,0);
-  y2 = map(y2,0,1,height,0);
-  stroke(255);
+  y1 = map(y1,0,1,height-10,0);
+  y2 = map(y2,0,1,height-10,0);
+  stroke(0,255,0);
   line(x1,y1,x2,y2);
   } 
   
@@ -55,8 +61,20 @@ void mousePressed(){
   points.add(pvector);
 }
 
-
+/*Calculate the optimal values for slope (m) and y-intercept(b) -
+for the equation of line y = mx + b*/
 float[] linearRegression(){
+
+/* The optimal values of m and b found using ordinary(simple) least squares, is given by
+the equation 
+            sum(((x - xMean)^2) * ((y-yMean)^2)) 
+      m =   ______________________________________
+                  sum((x-xMean)^2)
+                  
+                  
+       b = yMean - m*xMean        
+       
+ */
   
   float sumOfMeanResiduals = 0;
   float xMeanSquaredError = 0;
