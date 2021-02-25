@@ -47,6 +47,13 @@ void draw(){
   
   y1 = map(y1,0,1,height-10,0);
   y2 = map(y2,0,1,height-10,0);
+  
+  String slopeval = String.format("Slope: %5f",m);
+  String interVal = String.format("Y Intercept: %5f",b);
+      
+  text(slopeval,450,20);
+  text(interVal,450,40);
+  
   stroke(0,255,0);
   line(x1,y1,x2,y2);
   } 
